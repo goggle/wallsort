@@ -1,0 +1,51 @@
+# The base directory of the images
+directory = "/home/alex/test"
+
+# Different categories of images can be specified with a [[dir]] entry.
+# Valid key arguments are:
+# name:         The name of this category (string).
+# height:       The height of the image (in pixels). It can either be a
+#               integer or an array of two integers, in which case it specifies
+#               a range of valid image heights (the second element is
+#               interpreted as inclusive).
+# width:        The width of the image (in pixels). As above, this can be
+#               specified as an array of two integer values.
+# min_pixels:   The minimum amount of pixels in the image.
+# max_pixels:   The maximum amount of pixels in the image.
+#
+# Each category needs to have a name to be valid.
+# It might be a good idea to have a category which only contains a name tag,
+# so it is guaranteed that every image in the base directory satisfies the
+# conditions of at least one category.
+# Earlier defined categories have precedence.
+
+[[dir]]
+name = "1080p"
+height = [1080, 1200]
+width = [1920, 1920]
+
+[[dir]]
+name = "1440p"
+height = [1440, 1600]
+width = [2560, 2560]
+
+[[dir]]
+name = "QHDplus"
+height = [1800, 1800]
+width = [3200, 3200]
+
+[[dir]]
+name = "UHD"
+height = [2160, 2160]
+width = [3840, 3840]
+
+[[dir]]
+name = "lowres"
+max_pixels = 2073599
+
+[[dir]]
+name = "highres"
+min_pixels = 8294401
+
+[[dir]]
+name = "others"
