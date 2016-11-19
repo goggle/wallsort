@@ -3,11 +3,12 @@ package main
 import (
 	"fmt"
 
-	"github.com/goggle/imsort/imsort"
+	"github.com/goggle/wallsort/wallsort"
 )
 
 func main() {
 	fmt.Println("Hello World")
-	imsort.Initialize()
-	imsort.ReadConfiguration()
+	wallsort.Initialize()
+	wallsort.ReadConfiguration()
+
 }

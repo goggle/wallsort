@@ -22,22 +22,22 @@ directory = "/home/alex/test"
 [[dir]]
 name = "1080p"
 height = [1080, 1200]
-width = [1920, 1920]
+width = 1920
 
 [[dir]]
 name = "1440p"
 height = [1440, 1600]
-width = [2560, 2560]
+width = 2560
 
 [[dir]]
 name = "QHDplus"
-height = [1800, 1800]
-width = [3200, 3200]
+height = [1800]
+width = [3200]
 
 [[dir]]
 name = "UHD"
-height = [2160, 2160]
-width = [3840, 3840]
+height = [2160]
+width = [3840]
 
 [[dir]]
 name = "lowres"
