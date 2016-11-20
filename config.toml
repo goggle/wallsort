@@ -1,7 +1,7 @@
-# The base directory of the images
+# The base categoryectory of the images
 directory = "/home/alex/test"
 
-# Different categories of images can be specified with a [[dir]] entry.
+# Different categories of images can be specified with a [[category]] entry.
 # Valid key arguments are:
 # name:         The name of this category (string).
 # height:       The height of the image (in pixels). It can either be a
@@ -15,37 +15,43 @@ directory = "/home/alex/test"
 #
 # Each category needs to have a name to be valid.
 # It might be a good idea to have a category which only contains a name tag,
-# so it is guaranteed that every image in the base directory satisfies the
+# so it is guaranteed that every image in the base categoryectory satisfies the
 # conditions of at least one category.
 # Earlier defined categories have precedence.
 
-[[dir]]
+[[category]]
 name = "1080p"
-height = [1080, 1200]
+min_height = 1080
+max_height = 1200
 width = 1920
 
-[[dir]]
+[[category]]
 name = "1440p"
-height = [1440, 1600]
+min_height = 1440
+max_height = 1600
 width = 2560
 
-[[dir]]
+[[category]]
 name = "QHDplus"
-height = [1800]
-width = [3200]
+height = 1800
+width = 3200
 
-[[dir]]
+[[category]]
 name = "UHD"
-height = [2160]
-width = [3840]
+height = 2160
+width = 3840
 
-[[dir]]
+[[category]]
 name = "lowres"
 max_pixels = 2073599
+max_height = 1080
+max_width = 1920
 
-[[dir]]
+[[category]]
 name = "highres"
 min_pixels = 8294401
+min_height = 2160
+min_width = 3840
 
-[[dir]]
+[[category]]
 name = "others"
