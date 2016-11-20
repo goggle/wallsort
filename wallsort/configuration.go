@@ -80,6 +80,111 @@ func InitDirectory() error {
 	return nil
 }
 
-func SetBaseDirectory(dir string) {
-	Config.Directory = dir
+func SetBaseDirectory(basedir string) {
+	Config.Directory = basedir
+}
+
+func SetDefaultConfiguration(config *Configuration, basedir string) {
+	config.Directory = basedir
+	config.Categories = make([]Category, 0)
+	cat_1080p := Category{
+		Name:      "1080p",
+		Heights:   make([]int, 0),
+		Widths:    make([]int, 0),
+		Height:    0,
+		Width:     1920,
+		MinHeight: 1080,
+		MinWidth:  0,
+		MaxHeight: 1200,
+		MaxWidth:  0,
+		MinPixels: 0,
+		MaxPixels: 0,
+	}
+	cat_1440p := Category{
+		Name:      "1440p",
+		Heights:   make([]int, 0),
+		Widths:    make([]int, 0),
+		Height:    0,
+		Width:     2560,
+		MinHeight: 1440,
+		MinWidth:  0,
+		MaxHeight: 1600,
+		MaxWidth:  0,
+		MinPixels: 0,
+		MaxPixels: 0,
+	}
+	cat_qhdplus := Category{
+		Name:      "QHDplus",
+		Heights:   make([]int, 0),
+		Widths:    make([]int, 0),
+		Height:    1800,
+		Width:     3200,
+		MinHeight: 0,
+		MinWidth:  0,
+		MaxHeight: 0,
+		MaxWidth:  0,
+		MinPixels: 0,
+		MaxPixels: 0,
+	}
+	cat_uhd := Category{
+		Name:      "UHD",
+		Heights:   make([]int, 0),
+		Widths:    make([]int, 0),
+		Height:    2160,
+		Width:     3840,
+		MinHeight: 0,
+		MinWidth:  0,
+		MaxHeight: 0,
+		MaxWidth:  0,
+		MinPixels: 0,
+		MaxPixels: 0,
+	}
+	cat_lowres := Category{
+		Name:      "lowres",
+		Heights:   make([]int, 0),
+		Widths:    make([]int, 0),
+		Height:    0,
+		Width:     0,
+		MinHeight: 0,
+		MinWidth:  0,
+		MaxHeight: 1080,
+		MaxWidth:  1920,
+		MinPixels: 0,
+		MaxPixels: 2073599,
+	}
+	cat_highres := Category{
+		Name:      "highres",
+		Heights:   make([]int, 0),
+		Widths:    make([]int, 0),
+		Height:    0,
+		Width:     0,
+		MinHeight: 2160,
+		MinWidth:  3840,
+		MaxHeight: 0,
+		MaxWidth:  0,
+		MinPixels: 8294401,
+		MaxPixels: 0,
+	}
+	cat_others := Category{
+		Name:      "others",
+		Heights:   make([]int, 0),
+		Widths:    make([]int, 0),
+		Height:    0,
+		Width:     0,
+		MinHeight: 0,
+		MinWidth:  0,
+		MaxHeight: 0,
+		MaxWidth:  0,
+		MinPixels: 0,
+		MaxPixels: 0,
+	}
+
+	config.Categories = append(config.Categories, cat_1080p)
+	config.Categories = append(config.Categories, cat_1440p)
+	config.Categories = append(config.Categories, cat_qhdplus)
+	config.Categories = append(config.Categories, cat_uhd)
+	config.Categories = append(config.Categories, cat_lowres)
+	config.Categories = append(config.Categories, cat_highres)
+	config.Categories = append(config.Categories, cat_others)
+
 }
