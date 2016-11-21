@@ -28,8 +28,6 @@ func AskYesNo(question string, defaultYes bool) bool {
 
 func main() {
 	// fmt.Println("Hello World")
-	ans := AskYesNo("Hello?", true)
-	fmt.Println(ans)
 	errConfig := wallsort.Initialize()
 	if errConfig != nil {
 		fmt.Println("No configuration file found. Aborting...")
@@ -60,4 +58,10 @@ func main() {
 		// TODO: Printf
 		os.Exit(1)
 	}
+
+	errConfWrite := wallsort.WriteConfiguration("/home/alex/test/config.toml")
+	if errConfig != nil {
+		fmt.Printf("%v\n", errConfWrite)
+	}
+
 }

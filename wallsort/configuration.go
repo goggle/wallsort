@@ -1,10 +1,12 @@
 package wallsort
 
 import (
+	"bufio"
 	"errors"
 	"fmt"
 	"os"
 	"path"
+	"reflect"
 
 	"github.com/spf13/viper"
 )
@@ -21,7 +23,7 @@ func Initialize() error {
 func ReadConfiguration() error {
 	err := viper.Unmarshal(&Config)
 	// adjustConfiguration(&Config)
-	// fmt.Println(Config)
+	// fmt.Fprintln(Config)
 	return err
 }
 
@@ -186,5 +188,180 @@ func SetDefaultConfiguration(config *Configuration, basedir string) {
 	config.Categories = append(config.Categories, cat_lowres)
 	config.Categories = append(config.Categories, cat_highres)
 	config.Categories = append(config.Categories, cat_others)
+}
 
+func WriteConfiguration(configFile string) error {
+	fileHandle, errFile := os.Create(configFile)
+	if errFile != nil {
+		err := errors.New("Could not write configuration file. Try to manually create a configuration file.")
+		return err
+	}
+	writer := bufio.NewWriter(fileHandle)
+	defer fileHandle.Close()
+	confAddr := &Config
+	field, ok := reflect.TypeOf(confAddr).Elem().FieldByName("Directory")
+	// value := conf.Directory
+	if !ok {
+		err := errors.New("Could not write configuration file. Try to manually create a configuration file.")
+		return err
+	}
+	configKey := field.Tag.Get("mapstructure")
+	configLine := fmt.Sprintf("%s = \"%s\"", configKey, Config.Directory)
+	fmt.Fprintln(writer, configLine)
+
+	for _, cat := range Config.Categories {
+		field, ok = reflect.TypeOf(confAddr).Elem().FieldByName("Categories")
+		if !ok {
+			err := errors.New("Could not write configuration file. Try to manually create a configuration file.")
+			return err
+		}
+		configKey = field.Tag.Get("mapstructure")
+		configLine = fmt.Sprintf("\n[[%s]]", configKey)
+		fmt.Fprintln(writer, configLine)
+
+		if cat.Name != "" {
+			field, ok = reflect.TypeOf(&cat).Elem().FieldByName("Name")
+			if !ok {
+				err := errors.New("Could not write configuration file. Try to manually create a configuration file.")
+				return err
+			}
+			configKey = field.Tag.Get("mapstructure")
+			configLine = fmt.Sprintf("%s = \"%s\"", configKey, cat.Name)
+			fmt.Fprintln(writer, configLine)
+		}
+
+		if len(cat.Heights) > 0 {
+			field, ok = reflect.TypeOf(&cat).Elem().FieldByName("Heights")
+			if !ok {
+				err := errors.New("Could not write configuration file. Try to manually create a configuration file.")
+				return err
+			}
+			configKey = field.Tag.Get("mapstructure")
+			s := "["
+			for ind, n := range cat.Heights {
+				add := ""
+				if ind != 0 {
+					add = fmt.Sprintf(", %d", n)
+				} else {
+					add = fmt.Sprintf("%d", n)
+				}
+				s += add
+			}
+			s += "]"
+			configLine = fmt.Sprintf("%s = %s", configKey, s)
+			fmt.Fprintln(writer, configLine)
+		}
+
+		if len(cat.Widths) > 0 {
+			field, ok = reflect.TypeOf(&cat).Elem().FieldByName("Widths")
+			if !ok {
+				err := errors.New("Could not write configuration file. Try to manually create a configuration file.")
+				return err
+			}
+			configKey = field.Tag.Get("mapstructure")
+			s := "["
+			for ind, n := range cat.Widths {
+				add := ""
+				if ind != 0 {
+					add = fmt.Sprintf(", %d", n)
+				} else {
+					add = fmt.Sprintf("%d", n)
+				}
+				s += add
+			}
+			s += "]"
+			configLine = fmt.Sprintf("%s = %s", configKey, s)
+			fmt.Fprintln(writer, configLine)
+		}
+
+		if cat.Height > 0 {
+			field, ok = reflect.TypeOf(&cat).Elem().FieldByName("Height")
+			if !ok {
+				err := errors.New("Could not write configuration file. Try to manually create a configuration file.")
+				return err
+			}
+			configKey = field.Tag.Get("mapstructure")
+			configLine = fmt.Sprintf("%s = %d", configKey, cat.Height)
+			fmt.Fprintln(writer, configLine)
+		}
+
+		if cat.Width > 0 {
+			field, ok = reflect.TypeOf(&cat).Elem().FieldByName("Width")
+			if !ok {
+				err := errors.New("Could not write configuration file. Try to manually create a configuration file.")
+				return err
+			}
+			configKey = field.Tag.Get("mapstructure")
+			configLine = fmt.Sprintf("%s = %d", configKey, cat.Width)
+			fmt.Fprintln(writer, configLine)
+		}
+
+		if cat.MinHeight > 0 {
+			field, ok = reflect.TypeOf(&cat).Elem().FieldByName("MinHeight")
+			if !ok {
+				err := errors.New("Could not write configuration file. Try to manually create a configuration file.")
+				return err
+			}
+			configKey = field.Tag.Get("mapstructure")
+			configLine = fmt.Sprintf("%s = %d", configKey, cat.MinHeight)
+			fmt.Fprintln(writer, configLine)
+		}
+
+		if cat.MaxHeight > 0 {
+			field, ok = reflect.TypeOf(&cat).Elem().FieldByName("MaxHeight")
+			if !ok {
+				err := errors.New("Could not write configuration file. Try to manually create a configuration file.")
+				return err
+			}
+			configKey = field.Tag.Get("mapstructure")
+			configLine = fmt.Sprintf("%s = %d", configKey, cat.MaxHeight)
+			fmt.Fprintln(writer, configLine)
+		}
+
+		if cat.MinWidth > 0 {
+			field, ok = reflect.TypeOf(&cat).Elem().FieldByName("MinWidth")
+			if !ok {
+				err := errors.New("Could not write configuration file. Try to manually create a configuration file.")
+				return err
+			}
+			configKey = field.Tag.Get("mapstructure")
+			configLine = fmt.Sprintf("%s = %d", configKey, cat.MinWidth)
+			fmt.Fprintln(writer, configLine)
+		}
+
+		if cat.MaxWidth > 0 {
+			field, ok = reflect.TypeOf(&cat).Elem().FieldByName("MaxWidth")
+			if !ok {
+				err := errors.New("Could not write configuration file. Try to manually create a configuration file.")
+				return err
+			}
+			configKey = field.Tag.Get("mapstructure")
+			configLine = fmt.Sprintf("%s = %d", configKey, cat.MaxWidth)
+			fmt.Fprintln(writer, configLine)
+		}
+
+		if cat.MinPixels > 0 {
+			field, ok = reflect.TypeOf(&cat).Elem().FieldByName("MinPixels")
+			if !ok {
+				err := errors.New("Could not write configuration file. Try to manually create a configuration file.")
+				return err
+			}
+			configKey = field.Tag.Get("mapstructure")
+			configLine = fmt.Sprintf("%s = %d", configKey, cat.MinPixels)
+			fmt.Fprintln(writer, configLine)
+		}
+
+		if cat.MaxPixels > 0 {
+			field, ok = reflect.TypeOf(&cat).Elem().FieldByName("MaxPixels")
+			if !ok {
+				err := errors.New("Could not write configuration file. Try to manually create a configuration file.")
+				return err
+			}
+			configKey = field.Tag.Get("mapstructure")
+			configLine = fmt.Sprintf("%s = %d", configKey, cat.MaxPixels)
+			fmt.Fprintln(writer, configLine)
+		}
+	}
+	writer.Flush()
+	return nil
 }

@@ -1,4 +1,4 @@
-# The base categoryectory of the images
+# The base directory of the images
 directory = "/home/alex/test"
 
 # Different categories of images can be specified with a [[category]] entry.
