@@ -88,15 +88,23 @@ func SortImages(imageList []Image) {
 
 func MoveImages() error {
 	basedir := Config.Directory
+	errMessage := "The following files could not be moved:"
+	errMove := errors.New("")
+	errMove = nil
 	for _, cat := range Config.Categories {
 		destdir := path.Join(basedir, cat.Name)
 		for _, fname := range cat.Filenames {
 			src := path.Join(basedir, fname)
 			dst := path.Join(destdir, fname)
-			fmt.Printf("Moving %s to %s\n", src, dst)
+			err := os.Rename(src, dst)
+			if err != nil {
+				errMessage += "\n" + src
+				errMove = errors.New(errMessage)
+			}
+			fmt.Printf("File %s moved to %s.\n", src, dst)
 		}
 	}
-	return nil
+	return errMove
 }
 
 // Return true, if the image description img fullfills all the
