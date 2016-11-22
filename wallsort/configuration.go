@@ -38,8 +38,6 @@ func Initialize() error {
 
 func ReadConfiguration() error {
 	err := viper.Unmarshal(&Config)
-	// adjustConfiguration(&Config)
-	// fmt.Fprintln(Config)
 	return err
 }
 
@@ -216,7 +214,6 @@ func WriteConfiguration(configFile string) error {
 	defer fileHandle.Close()
 	confAddr := &Config
 	field, ok := reflect.TypeOf(confAddr).Elem().FieldByName("Directory")
-	// value := conf.Directory
 	if !ok {
 		err := errors.New("Could not write configuration file. Try to manually create a configuration file.")
 		return err

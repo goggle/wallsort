@@ -45,7 +45,6 @@ func AskYesNo(question string, defaultYes bool) bool {
 }
 
 func main() {
-	// fmt.Println("Hello World")
 	errConfig := wallsort.Initialize()
 	if errConfig != nil {
 		fmt.Println("No configuration file found.")
