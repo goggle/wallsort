@@ -72,3 +72,11 @@ Valid fields in a ```[[category]]``` section are:
 * ```name```: Defines a name for this category (e.g. ```name = "1920x1080"```).
 * ```height```: Defines the image height in pixels (e.g. ```height = 1080```).
 * ```width```: Defines the image width in pixels (e.g. ```width = 1920```).
+* ```heights```: Defines a list of possible image height values (e.g. ```heights = [1080, 1440, 1800]```)
+* ```widhts```: Defines a list of possible image width values.
+* ```min_height```: Defines the minimum height of the image (e.g. ```min_height = 1080``` matches all the images, which have a height greater or equal 1080).
+* ```max_height```: Defines the maximum height of the image.
+* ```min_width```: Defines the minimum width of the image.
+* ```max_width```: Defines the maximum widht of the image.
+* ```min_pixels```: Defines the minimum amount of pixels in the image (e.g. ```min_pixels = 10000``` matches all the images, which have 10000 or more pixels).
+* ```max_pixels```: Defines the maximum amount of pixels in the image.
