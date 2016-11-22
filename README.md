@@ -80,3 +80,17 @@ Valid fields in a ```[[category]]``` section are:
 * ```max_width```: Defines the maximum widht of the image.
 * ```min_pixels```: Defines the minimum amount of pixels in the image (e.g. ```min_pixels = 10000``` matches all the images, which have 10000 or more pixels).
 * ```max_pixels```: Defines the maximum amount of pixels in the image.
+
+Note: First defined categories have higher precedence. So if an image satisfies the rules
+for the categories ```1080p``` and ```others```, it will be moved into the subdirectory
+```1080p```, because it was defined first.
+
+
+## Usage
+
+Just Run
+```
+wallsort
+```
+to sort all the images in the image base directory defined in ```config.toml```.
+It will create subdirectories if necessary and move the matching images into them.
