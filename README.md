@@ -88,7 +88,7 @@ for the categories ```1080p``` and ```others```, it will be moved into the subdi
 
 ## Usage
 
-Just Run
+Just run
 ```
 wallsort
 ```
